@@ -8,8 +8,11 @@ import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -29,10 +32,10 @@ import com.phaseshiftlab.makeitmaterial.xyzreader.data.UpdaterService;
  * touched, lead to a {@link ArticleDetailActivity} representing item details. On tablets, the
  * activity presents a grid of items as cards.
  */
-public class ArticleListActivity extends ActionBarActivity implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+public class ArticleListActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>,  AppBarLayout.OnOffsetChangedListener {
 
-    private Toolbar mToolbar;
+    //private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
@@ -41,10 +44,14 @@ public class ArticleListActivity extends ActionBarActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
         final View toolbarContainerView = findViewById(R.id.toolbar_container);
+        CollapsingToolbarLayout collapsingToolbarLayout =
+                (CollapsingToolbarLayout) findViewById(R.id.main_collapsing);
+
+        collapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
@@ -108,6 +115,11 @@ public class ArticleListActivity extends ActionBarActivity implements
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mRecyclerView.setAdapter(null);
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        mSwipeRefreshLayout.setEnabled(verticalOffset == 0);
     }
 
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {

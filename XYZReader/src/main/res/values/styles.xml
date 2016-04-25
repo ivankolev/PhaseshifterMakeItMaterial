@@ -20,4 +20,8 @@
         <item name="colorAccent">@android:color/holo_orange_dark</item>
     </style>
 
+    <style name="Theme.XYZReader.NoActionBar" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorAccent">@android:color/holo_orange_dark</item>
+    </style>
+
 </resources>
