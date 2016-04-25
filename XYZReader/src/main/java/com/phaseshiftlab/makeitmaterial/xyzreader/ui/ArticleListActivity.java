@@ -35,7 +35,6 @@ import com.phaseshiftlab.makeitmaterial.xyzreader.data.UpdaterService;
 public class ArticleListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,  AppBarLayout.OnOffsetChangedListener {
 
-    //private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
@@ -44,14 +43,12 @@ public class ArticleListActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.main_collapsing);
 
-
-        final View toolbarContainerView = findViewById(R.id.toolbar_container);
-        CollapsingToolbarLayout collapsingToolbarLayout =
-                (CollapsingToolbarLayout) findViewById(R.id.main_collapsing);
-
-        collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+        if (collapsingToolbarLayout != null) {
+            collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+        }
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
@@ -154,12 +151,10 @@ public class ArticleListActivity extends AppCompatActivity implements
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             holder.subtitleView.setText(
-                    DateUtils.getRelativeTimeSpanString(
+                    String.format("%s by %s", DateUtils.getRelativeTimeSpanString(
                             mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-                            DateUtils.FORMAT_ABBREV_ALL).toString()
-                            + " by "
-                            + mCursor.getString(ArticleLoader.Query.AUTHOR));
+                            DateUtils.FORMAT_ABBREV_ALL).toString(), mCursor.getString(ArticleLoader.Query.AUTHOR)));
             holder.thumbnailView.setImageUrl(
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
