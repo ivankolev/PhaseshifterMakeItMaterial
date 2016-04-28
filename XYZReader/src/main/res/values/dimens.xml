@@ -4,11 +4,19 @@
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
 
-    <dimen name="fab_elevation">2dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="articlePadding">16dp</dimen>
+    <dimen name="articlePaddingBottom">4dp</dimen>
+    <dimen name="imageViewHeight">100dp</dimen>
+    <dimen name="cardViewMargin">4dp</dimen>
+    <dimen name="appBarLayoutHeight">300dp</dimen>
+    <dimen name="CTLexpandedTitleMarginStart">48dp</dimen>
+    <dimen name="CTLexpandedTitleMarginEnd">64dp</dimen>
+    <dimen name="recyclerViewPaddingBottom">28dp</dimen>
 
 </resources>
